@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FundManagementApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(FundManagementApplication.class, args);
     }
 
