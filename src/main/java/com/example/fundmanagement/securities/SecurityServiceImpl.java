@@ -35,9 +35,9 @@ public class SecurityServiceImpl {
     //add
     @Transactional
     public void addSecurity(Security security) {
-            Optional<Security> existingSecurity = securityRepository.findById(security.get_id());
+            Optional<Security> existingSecurity = securityRepository.findById(security.getSecurity_id());
             if (existingSecurity.isPresent()){
-                throw new FundAlreadyExistsException(security.getDescription());
+                throw new FundAlreadyExistsException(security.getSymbol());
             }
             securityRepository.save(security);
 
@@ -56,7 +56,7 @@ public class SecurityServiceImpl {
 
     //modifyDescription
     @Transactional
-    public void modifyDescription(int id, String newDescription) {
+    public void modifyDescription(int id, String newSymbol) {
             Optional<Security> existingSecurity = securityRepository.findById(id);
             if (existingSecurity.isEmpty()) {
                 throw new IllegalArgumentException();
@@ -64,13 +64,13 @@ public class SecurityServiceImpl {
 
             Security oldSecurity = existingSecurity.get();
 
-            if (oldSecurity.getDescription() != null &&
-                    oldSecurity.getDescription().equals(newDescription)  && newDescription.length() > 0) {
-                Optional<Security> securityByUpdatedName = securityRepository.findFundByDescription(newDescription);
+            if (oldSecurity.getSymbol() != null &&
+                    !(oldSecurity.getSymbol().equals(newSymbol))  && newSymbol.length() > 0) {
+                Optional<Security> securityByUpdatedName = securityRepository.findSecurityBySymbol(newSymbol);
                 if (securityByUpdatedName.isPresent()) {
-                    throw new FundAlreadyExistsException(newDescription);
+                    throw new FundAlreadyExistsException(newSymbol);
                 }
-                oldSecurity.setDescription(newDescription);
+                oldSecurity.setSymbol(newSymbol);
             }
 
 

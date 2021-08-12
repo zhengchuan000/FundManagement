@@ -7,5 +7,5 @@ import java.util.Optional;
 
 @Repository
 public interface SecurityRepository extends JpaRepository <Security,Integer>{
-    Optional<Security> findFundByDescription(String description);
+    Optional<Security> findSecurityBySymbol(String symbol);
 }

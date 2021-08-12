@@ -18,11 +18,6 @@ public class SecurityRestController {
     }
 
     @GetMapping
-    public String hello(){
-        return "Welcome to Securities catalog.";
-    }
-
-    @GetMapping(path = "/findAll")
     public List<Security> getAllSecurities(){
         return securityService.getAllSecurities();
     }
