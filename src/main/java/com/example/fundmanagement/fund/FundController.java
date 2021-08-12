@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/funds")
+@RequestMapping("/funds")
 public class FundController {
     private final FundService fundService;
 
@@ -17,19 +17,13 @@ public class FundController {
     }
 
 
-    @GetMapping(path = "/hello")
-    public String hello(){
-        return "Hello World";
-    }
-
-    //GET /api/v1/funds
     @GetMapping
     public List<Fund> getFunds(){
         return fundService.getFunds();
     }
 
     @GetMapping(path="{fundId}")
-    public Fund getFund(@PathVariable("fundId") Long id){
+    public Fund getFund(@PathVariable("fundId") Integer id){
         return fundService.getFund(id);
     }
 
@@ -39,12 +33,12 @@ public class FundController {
     }
 
     @DeleteMapping(path="{fundId}")
-    public void deleteFund(@PathVariable("fundId") Long id){
+    public void deleteFund(@PathVariable("fundId") Integer id){
         fundService.deleteFund(id);
     }
 
     @PutMapping(path = "{fundId}")
-    public void updateFund(@PathVariable Long fundId, @RequestBody Fund newFund){
+    public void updateFund(@PathVariable Integer fundId, @RequestBody Fund newFund){
         fundService.updateFund(fundId, newFund);
     }
 
