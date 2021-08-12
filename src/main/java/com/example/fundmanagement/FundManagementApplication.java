@@ -18,25 +18,4 @@ public class FundManagementApplication {
         SpringApplication.run(FundManagementApplication.class, args);
     }
 
-//    @Bean
-//    CommandLineRunner commandLineRunner(
-//            PositionsRepository positionsRepository) {
-//        return args -> {
-//            //Integer positionsId,String securityName,Integer quantity, LocalDate datePurchased,Integer fundId
-//            List<Positions> positions = List.of(
-//                    new Positions(1,
-//                            "IBM",
-//                            100,
-//                            LocalDate.of(2016, 1, 1),
-//                            1),
-//                    new Positions(2,
-//                            "IBM",
-//                            200,
-//                            LocalDate.of(2020, 1, 1),
-//                            3)
-//            );
-//
-//            List<Positions> savedPositions = positionsRepository.saveAll(positions);
-//        };
-//    }
 }
