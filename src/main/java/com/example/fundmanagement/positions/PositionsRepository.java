@@ -1,6 +1,5 @@
-package com.example.fundmanagement.repository;
+package com.example.fundmanagement.positions;
 
-import com.example.fundmanagement.model.Positions;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
