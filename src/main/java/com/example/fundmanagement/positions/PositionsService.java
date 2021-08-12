@@ -1,7 +1,5 @@
-package com.example.fundmanagement.service;
+package com.example.fundmanagement.positions;
 
-import com.example.fundmanagement.model.Positions;
-import com.example.fundmanagement.repository.PositionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

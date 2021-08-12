@@ -1,9 +1,6 @@
-package com.example.fundmanagement.controller;
+package com.example.fundmanagement.positions;
 
-import com.example.fundmanagement.model.Positions;
-import com.example.fundmanagement.service.PositionsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

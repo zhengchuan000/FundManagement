@@ -1,4 +1,4 @@
-package com.example.fundmanagement.model;
+package com.example.fundmanagement.positions;
 
 
 import javax.persistence.*;
