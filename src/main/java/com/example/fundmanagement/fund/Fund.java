@@ -8,25 +8,25 @@ import javax.persistence.Table;
 @Table(name = "funds")
 public class Fund {
     @Id
-    private long fund_id;
+    private Integer fund_id;
 
     private String name;
 
-    private long fund_manager_employee_id;
+    private Integer fund_manager_employee_id;
 
     public Fund() {
     }
 
-    public Fund(String name, long fund_manager_employee_id) {
+    public Fund(String name, Integer fund_manager_employee_id) {
         this.name = name;
         this.fund_manager_employee_id = fund_manager_employee_id;
     }
 
-    public long getFund_id() {
+    public Integer getFund_id() {
         return fund_id;
     }
 
-    public void setFund_id(long fund_id) {
+    public void setFund_id(Integer fund_id) {
         this.fund_id = fund_id;
     }
 
@@ -38,11 +38,11 @@ public class Fund {
         this.name = name;
     }
 
-    public long getFund_manager_employee_id() {
+    public Integer getFund_manager_employee_id() {
         return fund_manager_employee_id;
     }
 
-    public void setFund_manager_employee_id(long fund_manager_employee_id) {
+    public void setFund_manager_employee_id(Integer fund_manager_employee_id) {
         this.fund_manager_employee_id = fund_manager_employee_id;
     }
 }

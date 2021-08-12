@@ -76,17 +76,17 @@ DROP TABLE IF EXISTS `positions`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `positions` (
   `position_id` int NOT NULL,
-  `security_id` int DEFAULT NULL,
+  `security_name` varchar(45) DEFAULT NULL,
   `quantity` int DEFAULT NULL,
-  `Date_purchased` date DEFAULT NULL,
+  `date_purchased` date DEFAULT NULL,
   `funds_fund_id` int NOT NULL,
   `funds_fund_manager_employee_id` int NOT NULL,
-  `Securites_security_id` int NOT NULL,
-  PRIMARY KEY (`position_id`,`funds_fund_id`,`funds_fund_manager_employee_id`,`Securites_security_id`),
+  `securities_security_id` int NOT NULL,
+  PRIMARY KEY (`position_id`,`funds_fund_id`,`funds_fund_manager_employee_id`,`securities_security_id`),
   KEY `fk_Positions_funds1_idx` (`funds_fund_id`,`funds_fund_manager_employee_id`),
-  KEY `fk_Positions_Securites1_idx` (`Securites_security_id`),
+  KEY `fk_Positions_Securites1_idx` (`securities_security_id`),
   CONSTRAINT `fk_Positions_funds1` FOREIGN KEY (`funds_fund_id`, `funds_fund_manager_employee_id`) REFERENCES `funds` (`fund_id`, `fund_manager_employee_id`),
-  CONSTRAINT `fk_Positions_Securites1` FOREIGN KEY (`Securites_security_id`) REFERENCES `securites` (`security_id`)
+  CONSTRAINT `fk_Positions_Securites1` FOREIGN KEY (`securities_security_id`) REFERENCES `securities` (`security_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -96,32 +96,32 @@ CREATE TABLE `positions` (
 
 LOCK TABLES `positions` WRITE;
 /*!40000 ALTER TABLE `positions` DISABLE KEYS */;
-INSERT INTO `positions` VALUES (1,1,100,'2016-01-10',1,1,1),(2,1,120,'2016-05-12',1,1,1),(3,1,200,'2016-11-14',1,1,1),(4,1,125,'2016-02-02',2,1,1),(5,1,75,'2016-05-02',2,1,1),(6,1,45,'2017-01-23',3,1,1),(7,1,60,'2017-02-25',3,1,1),(8,2,100,'2016-03-12',4,2,2),(9,2,50,'2016-03-14',4,2,2),(10,2,50,'2016-04-27',5,2,2),(11,2,75,'2016-07-17',5,2,2),(12,2,90,'2017-05-24',5,2,2),(13,2,100,'2017-09-13',6,3,2),(14,3,130,'2016-01-04',7,3,3),(15,3,150,'2016-02-22',7,3,3),(16,3,140,'2016-05-12',8,4,3),(17,3,150,'2016-06-11',8,4,3),(18,3,100,'2016-11-11',9,4,3),(19,3,65,'2016-12-30',9,4,3),(20,4,50,'2017-04-04',10,4,4),(21,4,100,'2016-05-22',11,5,4),(22,4,125,'2016-10-10',11,5,4),(23,4,180,'2016-12-12',11,5,4),(24,4,200,'2017-02-14',11,5,4),(25,4,80,'2017-06-13',12,6,4),(26,1,100,'2017-10-12',13,6,1),(27,1,120,'2017-11-20',13,6,1),(28,1,200,'2017-12-12',14,7,1),(29,1,250,'2017-12-30',15,7,1),(30,1,120,'2018-01-03',15,7,1),(31,2,125,'2016-12-28',16,7,2),(32,2,160,'2017-02-13',16,7,2),(33,2,220,'2017-04-15',17,7,2);
+INSERT INTO `positions` VALUES (1,'IBM',100,'2016-01-10',1,1,1),(2,'IBM',120,'2016-05-12',1,1,1),(3,'IBM',200,'2016-11-14',1,1,1),(4,'IBM',125,'2016-02-02',2,1,1),(5,'IBM',75,'2016-05-02',2,1,1),(6,'IBM',45,'2017-01-23',3,1,1),(7,'IBM',60,'2017-02-25',3,1,1),(8,'Visa',100,'2016-03-12',4,2,2),(9,'Visa',50,'2016-03-14',4,2,2),(10,'Visa',50,'2016-04-27',5,2,2),(11,'Visa',75,'2016-07-17',5,2,2),(12,'Visa',90,'2017-05-24',5,2,2),(13,'Visa',100,'2017-09-13',6,3,2),(14,'Google',130,'2016-01-04',7,3,3),(15,'Google',150,'2016-02-22',7,3,3),(16,'Google',140,'2016-05-12',8,4,3),(17,'Google',150,'2016-06-11',8,4,3),(18,'Google',100,'2016-11-11',9,4,3),(19,'Google',65,'2016-12-30',9,4,3),(20,'CVS',50,'2017-04-04',10,4,4),(21,'CVS',100,'2016-05-22',11,5,4),(22,'CVS',125,'2016-10-10',11,5,4),(23,'CVS',180,'2016-12-12',11,5,4),(24,'CVS',200,'2017-02-14',11,5,4),(25,'CS',80,'2017-06-13',12,6,4),(26,'IBM',100,'2017-10-12',13,6,1),(27,'IBM',120,'2017-11-20',13,6,1),(28,'IBM',200,'2017-12-12',14,7,1),(29,'IBM',250,'2017-12-30',15,7,1),(30,'IBM',120,'2018-01-03',15,7,1),(31,'Visa',125,'2016-12-28',16,7,2),(32,'Visa',160,'2017-02-13',16,7,2),(33,'Visa',220,'2017-04-15',17,7,2);
 /*!40000 ALTER TABLE `positions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `securites`
+-- Table structure for table `securities`
 --
 
-DROP TABLE IF EXISTS `securites`;
+DROP TABLE IF EXISTS `securities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `securites` (
+CREATE TABLE `securities` (
   `security_id` int NOT NULL,
-  `Symbol` varchar(45) DEFAULT NULL,
+  `symbol` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`security_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `securites`
+-- Dumping data for table `securities`
 --
 
-LOCK TABLES `securites` WRITE;
-/*!40000 ALTER TABLE `securites` DISABLE KEYS */;
-INSERT INTO `securites` VALUES (1,'IBM'),(2,'Visa'),(3,'Google'),(4,'CVS');
-/*!40000 ALTER TABLE `securites` ENABLE KEYS */;
+LOCK TABLES `securities` WRITE;
+/*!40000 ALTER TABLE `securities` DISABLE KEYS */;
+INSERT INTO `securities` VALUES (1,'IBM'),(2,'Visa'),(3,'Google'),(4,'CVS');
+/*!40000 ALTER TABLE `securities` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -141,4 +141,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-11 14:06:08
+-- Dump completed on 2021-08-12 15:23:39

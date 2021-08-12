@@ -22,20 +22,29 @@ public class PositionsController {
     }
 
     //Show position by id
-    @GetMapping(path="{positonsId}")
+    @GetMapping(path="{positionsId}")
     public Positions getPositions(@PathVariable("positionsId") Integer id){
         return positionsService.getPositions(id);
     }
 
-//    //post
-//    @PostMapping
-//    public void postNewPositions(@RequestBody Positions newPositions){
-//        positionsService.addNewPositions(newPositions);
-//    }
-
     //add new position to a fund
-    //delete
+    @PostMapping
+    public void postNewPositions(@RequestBody Positions newPositions){
+        positionsService.addNewPositions(newPositions);
+    }
+
     //delete a position
-    //put
+    @DeleteMapping(path="{positionsId}")
+    public void deletePositions(@PathVariable("positionsId") Integer id){
+        positionsService.deletePositions(id);
+    }
+
     //update value of a position
+    @PutMapping(path="{positionsId}")
+    public void updatePositions(
+            @PathVariable("positionsId") Integer positionsId,
+            @RequestBody Positions updatedPositions){
+        positionsService.updatePositions(positionsId, updatedPositions);
+
+    }
 }

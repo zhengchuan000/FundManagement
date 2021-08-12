@@ -21,7 +21,7 @@ public class FundService {
         return fundRepository.findAll();
     }
 
-    public Fund getFund(Long id){
+    public Fund getFund(Integer id){
         Optional<Fund> fund = fundRepository.findById(id);
         if (fund.isEmpty()) {
             throw new FundNotFoundException(id);
@@ -37,7 +37,7 @@ public class FundService {
         fundRepository.save(newFund);
     }
 
-    public void deleteFund(Long id) {
+    public void deleteFund(Integer id) {
         if(fundRepository.existsById(id)) {
             fundRepository.deleteById(id);
         }
@@ -47,7 +47,7 @@ public class FundService {
     }
 
     @Transactional
-    public void updateFund(Long id, Fund newFund){
+    public void updateFund(Integer id, Fund newFund){
         Optional<Fund> existingFund = fundRepository.findById(id);
         if (existingFund.isEmpty()) {
             throw new FundNotFoundException(id);
