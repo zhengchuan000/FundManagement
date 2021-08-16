@@ -1,5 +1,6 @@
 package com.example.fundmanagement.fund;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,6 +13,7 @@ public class Fund {
 
     private String name;
 
+    @Column(name = "employee_id")
     private Integer fund_manager_employee_id;
 
     public Fund() {

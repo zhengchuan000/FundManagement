@@ -16,28 +16,31 @@ public class Positions {
     private Integer position_id;
     private Integer quantity;
     private LocalDate date_purchased;
+    @Column(name="fund_id")
     private Integer funds_fund_id;
-    private Integer funds_fund_manager_employee_id;
 
     @ManyToOne(optional = false,cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name="securities_security_id",insertable=false ,updatable=false)
+    @JoinColumn(name="security_id",insertable=false ,updatable=false)
     @JsonIdentityReference(alwaysAsId = true)
-   // @JsonManagedReference
     private Security securityInPosition;
 
     public Positions() {
     }
 
-
-    public Positions(Integer position_id, Security securityInPosition, Integer quantity, LocalDate date_purchased, Integer funds_fund_id, Integer funds_fund_manager_employee_id) {
+    public Positions(Integer position_id, Security securityInPosition, Integer quantity, LocalDate date_purchased, Integer funds_fund_id) {
         this.position_id = position_id;
         this.quantity = quantity;
         this.date_purchased = date_purchased;
         this.funds_fund_id = funds_fund_id;
-        this.funds_fund_manager_employee_id = funds_fund_manager_employee_id;
         this.securityInPosition = securityInPosition;
     }
 
+    public Positions(Integer position_id, Integer quantity, LocalDate date_purchased, Integer funds_fund_id) {
+        this.position_id = position_id;
+        this.quantity = quantity;
+        this.date_purchased = date_purchased;
+        this.funds_fund_id = funds_fund_id;
+    }
 
     public Integer getPosition_id() {
         return position_id;
@@ -71,15 +74,6 @@ public class Positions {
         this.funds_fund_id = funds_fund_id;
     }
 
-    public Integer getFunds_fund_manager_employee_id() {
-        return funds_fund_manager_employee_id;
-    }
-
-    public void setFunds_fund_manager_employee_id(Integer funds_fund_manager_employee_id) {
-        this.funds_fund_manager_employee_id = funds_fund_manager_employee_id;
-    }
-
-    //@JsonIgnore
     public Security getSecurityInPosition() {
         return securityInPosition;
     }
@@ -95,7 +89,6 @@ public class Positions {
                 ", quantity=" + quantity +
                 ", date_purchased=" + date_purchased +
                 ", funds_fund_id=" + funds_fund_id +
-                ", funds_fund_manager_employee_id=" + funds_fund_manager_employee_id +
                 ", securityInPosition=" + securityInPosition +
                 '}';
     }
