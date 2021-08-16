@@ -35,12 +35,13 @@ public class PositionsService {
     public void addNewPositions(Positions newPositions) {
         Optional<Positions> existingPositions = positionsRepository.findById(newPositions.getPosition_id());
         if(existingPositions.isPresent()){
-            throw new IllegalArgumentException("Positions Existed");
+            throw new PositionAlreadyExistsException(newPositions.getPosition_id());
         }
-//        //check if the position's fundId Exist, if not -- exception
-//        if(fundRepository.findById(newPositions.getFunds_fund_id()).isEmpty()){
-//            throw new IllegalArgumentException("Cannot post to a not existed fund");
-//        }
+        //check if the position's fundId Exist, if not -- exception
+        if(fundRepository.findById(newPositions.getFunds_fund_id()).isEmpty()){
+            throw new IllegalArgumentException("Cannot post to a none existing fund");
+        }
+
         positionsRepository.save(newPositions);
     }
 
@@ -66,10 +67,10 @@ public class PositionsService {
             throw new IllegalStateException("Positions ID in path and in request body are different.");
         }
         // Update SecurityName
-        if (updatedPositions.getSecurity_name() != null &&
-                !Objects.equals(updatedPositions.getSecurity_name(), positions.getSecurity_name()) &&
-                updatedPositions.getSecurity_name().length() > 0){
-            positions.setSecurity_name(updatedPositions.getSecurity_name());
+        if (updatedPositions.getSecurityInPosition().getSymbol() != null &&
+                !Objects.equals(updatedPositions.getSecurityInPosition().getSymbol(), positions.getSecurityInPosition().getSymbol()) &&
+                updatedPositions.getSecurityInPosition().getSymbol().length() > 0){
+            positions.getSecurityInPosition().setSymbol(updatedPositions.getSecurityInPosition().getSymbol());
         }
         // Update Quantity
         if (updatedPositions.getQuantity() != 0 && updatedPositions.getQuantity() >= 0){

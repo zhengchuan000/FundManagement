@@ -1,50 +1,50 @@
 package com.example.fundmanagement.positions;
 
 
+import com.example.fundmanagement.securities.Security;
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "positions")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "position_id")
 public class Positions {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer position_id;
-
-    //@ManyToOne()
-    private String security_name;
     private Integer quantity;
     private LocalDate date_purchased;
     private Integer funds_fund_id;
     private Integer funds_fund_manager_employee_id;
-    private Integer securities_security_id;
+
+    @ManyToOne(optional = false,cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name="securities_security_id",insertable=false ,updatable=false)
+    @JsonIdentityReference(alwaysAsId = true)
+   // @JsonManagedReference
+    private Security securityInPosition;
 
     public Positions() {
     }
 
-    public Positions(Integer position_id, String security_name, Integer quantity, LocalDate date_purchased, Integer funds_fund_id,Integer funds_fund_manager_employee_id,Integer securities_security_id) {
+
+    public Positions(Integer position_id, Security securityInPosition, Integer quantity, LocalDate date_purchased, Integer funds_fund_id, Integer funds_fund_manager_employee_id) {
         this.position_id = position_id;
-        this.security_name = security_name;
         this.quantity = quantity;
         this.date_purchased = date_purchased;
         this.funds_fund_id = funds_fund_id;
         this.funds_fund_manager_employee_id = funds_fund_manager_employee_id;
-        this.securities_security_id = securities_security_id;
+        this.securityInPosition = securityInPosition;
     }
+
 
     public Integer getPosition_id() {
         return position_id;
     }
 
-    public void setPosition_id(Integer positionId) {
-        this.position_id = positionId;
-    }
-
-    public String getSecurity_name() {
-        return security_name;
-    }
-
-    public void setSecurity_name(String securityName) {
-        this.security_name = securityName;
+    public void setPosition_id(Integer position_id) {
+        this.position_id = position_id;
     }
 
     public Integer getQuantity() {
@@ -59,16 +59,16 @@ public class Positions {
         return date_purchased;
     }
 
-    public void setDate_purchased(LocalDate datePurchased) {
-        this.date_purchased = datePurchased;
+    public void setDate_purchased(LocalDate date_purchased) {
+        this.date_purchased = date_purchased;
     }
 
     public Integer getFunds_fund_id() {
         return funds_fund_id;
     }
 
-    public void setFunds_fund_id(Integer fundId) {
-        this.funds_fund_id = fundId;
+    public void setFunds_fund_id(Integer funds_fund_id) {
+        this.funds_fund_id = funds_fund_id;
     }
 
     public Integer getFunds_fund_manager_employee_id() {
@@ -79,24 +79,24 @@ public class Positions {
         this.funds_fund_manager_employee_id = funds_fund_manager_employee_id;
     }
 
-    public Integer getSecurities_security_id() {
-        return securities_security_id;
+    //@JsonIgnore
+    public Security getSecurityInPosition() {
+        return securityInPosition;
     }
 
-    public void setSecurities_security_id(Integer securities_security_id) {
-        this.securities_security_id = securities_security_id;
+    public void setSecurityInPosition(Security securityInPosition) {
+        this.securityInPosition = securityInPosition;
     }
 
     @Override
     public String toString() {
         return "Positions{" +
                 "position_id=" + position_id +
-                ", security_name='" + security_name + '\'' +
                 ", quantity=" + quantity +
                 ", date_purchased=" + date_purchased +
                 ", funds_fund_id=" + funds_fund_id +
                 ", funds_fund_manager_employee_id=" + funds_fund_manager_employee_id +
-                ", securities_security_id=" + securities_security_id +
+                ", securityInPosition=" + securityInPosition +
                 '}';
     }
 }
