@@ -2,15 +2,17 @@ package com.example.fundmanagement.positions;
 
 
 import com.example.fundmanagement.securities.Security;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "positions")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "position_id")
 public class Positions {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer position_id;
     private Integer quantity;
     private LocalDate date_purchased;
@@ -20,6 +22,7 @@ public class Positions {
     @ManyToOne(optional = false,cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name="securities_security_id",insertable=false ,updatable=false)
     @JsonIdentityReference(alwaysAsId = true)
+   // @JsonManagedReference
     private Security securityInPosition;
 
     public Positions() {
@@ -76,6 +79,7 @@ public class Positions {
         this.funds_fund_manager_employee_id = funds_fund_manager_employee_id;
     }
 
+    //@JsonIgnore
     public Security getSecurityInPosition() {
         return securityInPosition;
     }
