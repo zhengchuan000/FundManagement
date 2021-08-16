@@ -19,7 +19,6 @@ public class Security {
 
     @OneToMany(mappedBy = "securityInPosition",cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JsonIdentityReference(alwaysAsId = true)
-    //@JsonBackReference
     private List<Positions> positions;
 
     //constructors
@@ -31,6 +30,10 @@ public class Security {
 
     public Security(Integer security_id, String symbol) {
         this.security_id = security_id;
+        this.symbol = symbol;
+    }
+
+    public Security(String symbol) {
         this.symbol = symbol;
     }
 
