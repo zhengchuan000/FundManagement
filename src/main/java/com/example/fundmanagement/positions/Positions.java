@@ -1,6 +1,7 @@
 package com.example.fundmanagement.positions;
 
 
+import com.example.fundmanagement.fund.Fund;
 import com.example.fundmanagement.securities.Security;
 import com.fasterxml.jackson.annotation.*;
 
@@ -16,33 +17,45 @@ public class Positions {
     private Integer position_id;
     private Integer quantity;
     private LocalDate date_purchased;
+
     @Column(name="fund_id")
     private Integer funds_fund_id;
     @Column(name="security_id")
     private Integer security_id;
+    @Column(name="fund_id")
+    private Integer fund_id;
 
     @ManyToOne(optional = false,cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name="security_id",insertable = false,updatable = false)
     @JsonIdentityReference(alwaysAsId = true)
     private Security securityInPosition;
 
+    @ManyToOne(optional = false,cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name="fund_id",insertable=false ,updatable=false)
+    @JsonIdentityReference(alwaysAsId = true)
+    private Fund fundInPosition;
+
     public Positions() {
     }
 
-    public Positions(Integer position_id, Integer quantity, LocalDate date_purchased, Integer funds_fund_id,Security securityInPosition) {
+    public Positions(Integer position_id, Integer quantity, LocalDate date_purchased, Integer funds_fund_id,Integer security_id, Security securityInPosition, Fund fundInPosition) {
         this.position_id = position_id;
         this.quantity = quantity;
         this.date_purchased = date_purchased;
         this.funds_fund_id = funds_fund_id;
+        this.security_id =security_id;
         this.securityInPosition=securityInPosition;
+        this.fundInPosition=fundInPosition;
     }
-    public Positions(Integer position_id, Integer quantity, LocalDate date_purchased, Integer funds_fund_id,Integer security_id) {
+
+    public Positions(Integer position_id, Integer quantity, LocalDate date_purchased, Integer funds_fund_id, Integer security_id) {
         this.position_id = position_id;
         this.quantity = quantity;
         this.date_purchased = date_purchased;
         this.funds_fund_id = funds_fund_id;
-        this.security_id=security_id;
+        this.security_id = security_id;
     }
+
     public Positions(Integer quantity, LocalDate date_purchased, Integer funds_fund_id,Security securityInPosition) {
         this.quantity = quantity;
         this.date_purchased = date_purchased;
@@ -55,7 +68,13 @@ public class Positions {
         this.quantity = quantity;
         this.date_purchased = date_purchased;
         this.funds_fund_id = funds_fund_id;
+=======
+        this.securityInPosition = securityInPosition;
+        this.fundInPosition = fundInPosition;
+>>>>>>> 62091f318466717e5ea472df2de424df7989b08e
     }
+
+
 
     public Integer getSecurity_id() {
         return security_id;
@@ -105,6 +124,14 @@ public class Positions {
         this.securityInPosition = securityInPosition;
     }
 
+    public Fund getFundInPosition() {
+        return fundInPosition;
+    }
+
+    public void setFundInPosition(Fund fundInPosition) {
+        this.fundInPosition = fundInPosition;
+    }
+
     @Override
     public String toString() {
         return "Positions{" +
@@ -114,6 +141,7 @@ public class Positions {
                 ", funds_fund_id=" + funds_fund_id +
                 ", security_id=" + security_id +
                 ", securityInPosition=" + securityInPosition +
+                ", fundInPosition=" + fundInPosition +
                 '}';
     }
 }
