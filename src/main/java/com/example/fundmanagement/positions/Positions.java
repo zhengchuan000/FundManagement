@@ -20,10 +20,9 @@ public class Positions {
 
     @Column(name="fund_id")
     private Integer funds_fund_id;
+
     @Column(name="security_id")
     private Integer security_id;
-    @Column(name="fund_id")
-    private Integer fund_id;
 
     @ManyToOne(optional = false,cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name="security_id",insertable = false,updatable = false)
@@ -68,13 +67,7 @@ public class Positions {
         this.quantity = quantity;
         this.date_purchased = date_purchased;
         this.funds_fund_id = funds_fund_id;
-=======
-        this.securityInPosition = securityInPosition;
-        this.fundInPosition = fundInPosition;
->>>>>>> 62091f318466717e5ea472df2de424df7989b08e
     }
-
-
 
     public Integer getSecurity_id() {
         return security_id;
