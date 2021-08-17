@@ -21,8 +21,11 @@ public class Positions {
     @Column(name="fund_id")
     private Integer funds_fund_id;
 
+    @Column(name="security_id")
+    private Integer security_id;
+
     @ManyToOne(optional = false,cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name="security_id",insertable=false ,updatable=false)
+    @JoinColumn(name="security_id",insertable = false,updatable = false)
     @JsonIdentityReference(alwaysAsId = true)
     private Security securityInPosition;
 
@@ -34,13 +37,44 @@ public class Positions {
     public Positions() {
     }
 
-    public Positions(Integer position_id, Integer quantity, LocalDate date_purchased, Integer funds_fund_id, Security securityInPosition, Fund fundInPosition) {
+    public Positions(Integer position_id, Integer quantity, LocalDate date_purchased, Integer funds_fund_id,Integer security_id, Security securityInPosition, Fund fundInPosition) {
         this.position_id = position_id;
         this.quantity = quantity;
         this.date_purchased = date_purchased;
         this.funds_fund_id = funds_fund_id;
-        this.securityInPosition = securityInPosition;
-        this.fundInPosition = fundInPosition;
+        this.security_id =security_id;
+        this.securityInPosition=securityInPosition;
+        this.fundInPosition=fundInPosition;
+    }
+
+    public Positions(Integer position_id, Integer quantity, LocalDate date_purchased, Integer funds_fund_id, Integer security_id) {
+        this.position_id = position_id;
+        this.quantity = quantity;
+        this.date_purchased = date_purchased;
+        this.funds_fund_id = funds_fund_id;
+        this.security_id = security_id;
+    }
+
+    public Positions(Integer quantity, LocalDate date_purchased, Integer funds_fund_id,Security securityInPosition) {
+        this.quantity = quantity;
+        this.date_purchased = date_purchased;
+        this.funds_fund_id = funds_fund_id;
+        this.securityInPosition=securityInPosition;
+    }
+
+    public Positions(Integer position_id, Integer quantity, LocalDate date_purchased, Integer funds_fund_id) {
+        this.position_id = position_id;
+        this.quantity = quantity;
+        this.date_purchased = date_purchased;
+        this.funds_fund_id = funds_fund_id;
+    }
+
+    public Integer getSecurity_id() {
+        return security_id;
+    }
+
+    public void setSecurity_id(Integer security_id) {
+        this.security_id = security_id;
     }
 
     public Integer getPosition_id() {
@@ -98,6 +132,7 @@ public class Positions {
                 ", quantity=" + quantity +
                 ", date_purchased=" + date_purchased +
                 ", funds_fund_id=" + funds_fund_id +
+                ", security_id=" + security_id +
                 ", securityInPosition=" + securityInPosition +
                 ", fundInPosition=" + fundInPosition +
                 '}';

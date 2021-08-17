@@ -17,7 +17,7 @@ public class Security {
 
     private String symbol;
 
-    @OneToMany(mappedBy = "securityInPosition",cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "securityInPosition",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIdentityReference(alwaysAsId = true)
     private List<Positions> positions;
 
